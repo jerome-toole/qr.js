@@ -737,7 +737,7 @@ var QRCode = {
 		var matrix = QRCode['generate'](data, options);
 		var n = matrix.length;
 		var modsize = Math.max(options.modulesize || 5, 0.5);
-		var margin = Math.max(options.margin? options.margin : 4, 0.0);
+		var margin = Math.max(options.margin !== null ? options.margin : 4, 0.0);
 		var size = modsize * (n + 2 * margin);
 
 		var common = ' class= "fg"'+' width="'+modsize+'" height="'+modsize+'"/>';
@@ -745,6 +745,10 @@ var QRCode = {
 		var e = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
 		e.setAttribute('viewBox', '0 0 '+size+' '+size);
 		e.setAttribute('style', 'shape-rendering:crispEdges');
+		if (options.modulesize) {
+            e.setAttribute('width', size);
+            e.setAttribute('height', size);
+        }
 
 		var svg = [
 			'<style scoped>.bg{fill:#FFF}.fg{fill:#000}</style>',
