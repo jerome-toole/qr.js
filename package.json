@@ -1,6 +1,6 @@
 {
   "name": "qrjs",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "QR code generator in Javascript",
   "main": "qr.js",
   "scripts": {
