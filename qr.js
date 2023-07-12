@@ -713,6 +713,8 @@ var QRCode = {
 		options = options || {};
 		var matrix = QRCode['generate'](data, options);
 		var modsize = Math.max(options.modulesize || 5, 0.5);
+		var unit = options.unit || 'px';
+		var ratio = options.ratio || 1;
 		var margin = Math.max(options.margin !== null ? options.margin : 4, 0.0);
 
 		var e = document.createElement('div');
@@ -722,7 +724,10 @@ var QRCode = {
 		for (var i = 0; i < n; ++i) {
 			html.push('<tr>');
 			for (var j = 0; j < n; ++j) {
-				html.push('<td style="width:' + modsize + 'px;height:' + modsize + 'px' +
+				const size = unit !== 'px'
+					? 'width:' + modsize * ratio + unit + '; height:' + modsize * ratio + unit
+					: 'width:' + modsize + 'px;height:' + modsize + 'px'
+				html.push('<td style="' + size +
 					(matrix[i][j] ? ';background:#000' : '') + '" ' +
 					'part="' + (matrix[i][j] ? 'module-fg' : 'module-bg') + '" ' + '></td>');
 			}
